@@ -10,10 +10,9 @@ import java.util.Scanner;
 
 public class Main {
   static Path currentPath = Paths.get("");
-  static String path = currentPath.toAbsolutePath().toString() + "\\CreateJavaBundle";
+  static String path = currentPath.toAbsolutePath().toString() + "\\CreateJavaBundle\\src\\main\\java\\";
   public static void main(final String[] args) throws IOException {
 
-    System.out.println(path + "\\src\\main\\java\\template\\");
     String domainName;
     String instanceName;
     String auth;
@@ -40,7 +39,7 @@ public class Main {
       String contents = "";
 
       BufferedReader reader = new BufferedReader(
-              new FileReader(path + "\\src\\main\\java\\template\\"+list.get(i))
+              new FileReader(path + "template\\"+list.get(i))
       );
       String str;
       while ((str = reader.readLine()) != null) {
@@ -93,20 +92,19 @@ public class Main {
   public static void createTemplate(String domainName, String contents, int i) throws IOException {
     List<String> list = setResultFileName(domainName);
 
-    File folder = new File(path + "\\src\\main\\java\\" + domainName);
-    System.out.println(path + "\\" + domainName);
+    File folder = new File(path +  domainName);
     if (!folder.exists()) {
-      folder.mkdir(); //폴더 생성합니다.
+      folder.mkdir();
     }
 
-    File file = new File(path + "\\src\\main\\java\\"+ domainName + "\\" +list.get(i));
-    if(!file.exists()){ // 파일이 존재하지 않으면
-      file.createNewFile(); // 신규생성
+    File file = new File(path + domainName + "\\" +list.get(i));
+    if(!file.exists()){
+      file.createNewFile();
     }
     BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
     writer.write(contents);
-    writer.flush(); // 버퍼의 남은 데이터를 모두 쓰기
-    writer.close(); // 스트림 종료
-    System.out.println(path + "\\src\\main\\java\\"+ domainName + "\\" +list.get(i) + "파일이 생성되었습니다.");
+    writer.flush();
+    writer.close();
+    System.out.println(path + domainName + "\\" +list.get(i) + "파일이 생성되었습니다.");
   }
 }
