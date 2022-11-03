@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linktree.aibsc.mapper.${DomainName}Mapper">
+    <resultMap id="${InstanceName}ResultMap" type="com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}ResponseDto">
+
+    </resultMap>
+
+    <select id="get${DomainName}SearchList" parameterType="com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SearchDto" resultMap="${InstanceName}ResultMap">
+        SELECT
+            *
+        FROM ${TableName} M
+    </select>
+
+</mapper>

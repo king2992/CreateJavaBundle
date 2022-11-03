@@ -1,0 +1,74 @@
+package com.linktree.aibsc.service;
+
+import com.linktree.aibsc.domain.${InstanceName}s.${DomainName};
+import com.linktree.aibsc.domain.${InstanceName}s.${DomainName}Repository;
+import com.linktree.aibsc.excel.ExcelReader;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}ResponseDto;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveDto;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveExcelDto;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+@Transactional(readOnly = true)
+@Service
+public class ${DomainName}Service {
+
+    private final ${DomainName}Repository ${InstanceName}Repository;
+    private final MessageSource ms;
+
+    public ${DomainName}Service(${DomainName}Repository ${InstanceName}Repository, MessageSource ms) {
+        this.${InstanceName}Repository = ${InstanceName}Repository;
+        this.ms = ms;
+    }
+
+    @Transactional
+    public ${DomainName}ResponseDto save(${DomainName}SaveDto ${InstanceName}SaveDto) {
+
+       ${DomainName} ${InstanceName} = ${InstanceName}Repository.save(${DomainName}.builder()
+ 
+               .build());
+
+       return ${DomainName}ResponseDto.builder()
+
+               .build();
+    }
+
+    @Transactional
+    public ${DomainName}ResponseDto modify(Long id, ${DomainName}SaveDto ${InstanceName}SaveDto) {
+        ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+
+        ${DomainName} saved${DomainName} = ${InstanceName}.change${DomainName}(id, ${InstanceName}SaveDto);
+
+        return ${DomainName}ResponseDto.builder()
+
+                .build();
+    }
+
+    @Transactional
+    public Long delete(Long id) {
+        ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+        ${InstanceName}Repository.delete(${InstanceName});
+        return id;
+    }
+
+    public ${DomainName}ResponseDto get${DomainName}(Long id) {
+        ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+
+        return ${DomainName}ResponseDto.builder()
+
+                .build();
+    }
+}

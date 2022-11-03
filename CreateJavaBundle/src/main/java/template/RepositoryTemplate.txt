@@ -1,0 +1,16 @@
+package com.linktree.aibsc.domain.codes;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
+
+public interface ${DomainName}Repository extends JpaRepository<${DomainName}, Long> {
+
+
+
+
+
+}

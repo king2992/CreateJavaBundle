@@ -1,0 +1,17 @@
+package com.linktree.aibsc.web.dto.${InstanceName}s;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ${DomainName}SaveDto {
+
+
+}

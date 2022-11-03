@@ -1,0 +1,61 @@
+package com.linktree.aibsc.web;
+
+
+import com.linktree.aibsc.service.${DomainName}Service;
+import com.linktree.aibsc.service.ResponseService;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}ResponseDto;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveDto;
+import com.linktree.aibsc.web.dto.response.SingleResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+@Api(tags = "")
+@RequiredArgsConstructor
+@RestController
+public class ${DomainName}Controller {
+
+    private final ${DomainName}Service ${InstanceName}Service;
+    private final ResponseService responseService;
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "${DomainKorName}를 생성한다.")
+    @PostMapping("/api/${auth}/v1/${InstanceName}")
+    public SingleResult<${DomainName}ResponseDto> save(@RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
+        return responseService.getSingleResult(${InstanceName}Service.save(${InstanceName}SaveDto));
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "${DomainKorName}를 수정한다.")
+    @PutMapping("/api/${auth}/v1/${InstanceName}/{id}")
+    public SingleResult<${DomainName}ResponseDto> modify(@PathVariable Long id, @RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
+        return responseService.getSingleResult(${InstanceName}Service.modify(id, ${InstanceName}SaveDto));
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "${DomainKorName}를 삭제한다.")
+    @DeleteMapping("/api/${auth}/v1/${InstanceName}/{id}")
+    public Long remove(@PathVariable Long id){
+        return ${InstanceName}Service.delete(id);
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "${DomainKorName}를 id 를 이용하여 조회한다.")
+    @GetMapping("/api/${auth}/v1/${InstanceName}/{id}")
+    public SingleResult<${DomainName}ResponseDto> detail(@PathVariable Long id){
+        return responseService.getSingleResult(${InstanceName}Service.get${DomainName}(id));
+    }
+}

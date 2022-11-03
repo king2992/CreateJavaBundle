@@ -1,0 +1,27 @@
+package com.linktree.aibsc.domain.${InstanceName}s;
+
+import com.linktree.aibsc.domain.BaseTimeEntity;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class ${DomainName} extends BaseTimeEntity {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+
+}

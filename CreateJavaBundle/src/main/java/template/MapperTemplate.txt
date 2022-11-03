@@ -1,0 +1,14 @@
+package com.linktree.aibsc.mapper;
+
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}ResponseDto;
+import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SearchDto;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Mapper
+@Repository
+public interface ${DomainName}Mapper {
+    List<${DomainName}ResponseDto> get${DomainName}SearchList(${DomainName}SearchDto ${InstanceName}SearchDto);
+}
