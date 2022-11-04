@@ -12,7 +12,7 @@ public class Main {
   static Path currentPath = Paths.get("");
   static String path = currentPath.toAbsolutePath().toString() + "\\CreateJavaBundle\\src\\main\\java\\";
   public static void main(final String[] args) throws IOException {
-
+    System.out.println("커밋테스트");
     String domainName;
     String instanceName;
     String auth;
