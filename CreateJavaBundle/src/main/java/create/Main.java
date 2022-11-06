@@ -69,6 +69,7 @@ public class Main {
     list.add("SaveDtoTemplate.txt");
     list.add("SearchDtoTemplate.txt");
     list.add("ServiceTemplate.txt");
+    list.add("ApiTemplate.txt");
 
     return list;
   }
@@ -85,6 +86,7 @@ public class Main {
     list.add(domainName+"SaveDto.java");
     list.add(domainName+"SearchDto.java");
     list.add(domainName+"Service.java");
+    list.add(domainName+"API.js");
 
     return list;
   }

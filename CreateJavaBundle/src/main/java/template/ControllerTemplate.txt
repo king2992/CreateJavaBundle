@@ -21,41 +21,49 @@ import org.springframework.web.bind.annotation.*;
 public class ${DomainName}Controller {
 
     private final ${DomainName}Service ${InstanceName}Service;
-    private final ResponseService responseService;
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "${DomainKorName}를 생성한다.")
-    @PostMapping("/api/${auth}/v1/${InstanceName}")
-    public SingleResult<${DomainName}ResponseDto> save(@RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
-        return responseService.getSingleResult(${InstanceName}Service.save(${InstanceName}SaveDto));
+    @PostMapping("/api/${auth}/v1/${InstanceName}/save${DomainName}")
+    public ResultStatus<String> save${DomainName}(@RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
+        return ${InstanceName}Service.save${DomainName}(${InstanceName}SaveDto);
     }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "${DomainKorName}를 수정한다.")
-    @PutMapping("/api/${auth}/v1/${InstanceName}/{id}")
-    public SingleResult<${DomainName}ResponseDto> modify(@PathVariable Long id, @RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
-        return responseService.getSingleResult(${InstanceName}Service.modify(id, ${InstanceName}SaveDto));
+    @PutMapping("/api/${auth}/v1/${InstanceName}/modify${DomainName}")
+    public ResultStatus<String> modify${DomainName}(@RequestBody ${DomainName}SaveDto ${InstanceName}SaveDto){
+        return ${InstanceName}Service.modify${DomainName}(${InstanceName}SaveDto);
     }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "${DomainKorName}를 삭제한다.")
-    @DeleteMapping("/api/${auth}/v1/${InstanceName}/{id}")
-    public Long remove(@PathVariable Long id){
-        return ${InstanceName}Service.delete(id);
+    @DeleteMapping("/api/${auth}/v1/${InstanceName}/delete${DomainName}/{id}")
+    public ResultStatus<String> delete${DomainName}(@PathVariable Long id){
+        return ${InstanceName}Service.delete${DomainName}(id);
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "${DomainKorName}를 조회한다.")
+    @GetMapping("/api/${auth}/v1/${InstanceName}/get${DomainName}SearchList")
+    public ResultStatus<String> get${DomainName}SearchList(@RequestBody ${DomainName}SearchDto ${InstanceName}SearchDto){
+        return ${InstanceName}Service.get${DomainName}SearchList(${InstanceName}SearchDto);
     }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", required = false, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "${DomainKorName}를 id 를 이용하여 조회한다.")
-    @GetMapping("/api/${auth}/v1/${InstanceName}/{id}")
-    public SingleResult<${DomainName}ResponseDto> detail(@PathVariable Long id){
-        return responseService.getSingleResult(${InstanceName}Service.get${DomainName}(id));
+    @GetMapping("/api/${auth}/v1/${InstanceName}/detail${DomainName}/{id}")
+    public ResultStatus<String> detail${DomainName}(@PathVariable Long id){
+        return ${InstanceName}Service.detail${DomainName}(id);
     }
 }

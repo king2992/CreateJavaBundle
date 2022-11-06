@@ -1,11 +1,11 @@
 package com.linktree.aibsc.service;
 
-import com.linktree.aibsc.domain.${InstanceName}s.${DomainName};
-import com.linktree.aibsc.domain.${InstanceName}s.${DomainName}Repository;
+import com.linktree.aibsc.domain.${InstanceName}.${DomainName};
+import com.linktree.aibsc.domain.${InstanceName}.${DomainName}Repository;
 import com.linktree.aibsc.excel.ExcelReader;
-import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}ResponseDto;
-import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveDto;
-import com.linktree.aibsc.web.dto.${InstanceName}s.${DomainName}SaveExcelDto;
+import com.linktree.aibsc.web.dto.${InstanceName}.${DomainName}ResponseDto;
+import com.linktree.aibsc.web.dto.${InstanceName}.${DomainName}SaveDto;
+import com.linktree.aibsc.web.dto.${InstanceName}.${DomainName}SaveExcelDto;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -24,51 +24,118 @@ import java.util.Optional;
 public class ${DomainName}Service {
 
     private final ${DomainName}Repository ${InstanceName}Repository;
+
+    private final ${DomainName}Mapper ${InstanceName}Mapper;
+
     private final MessageSource ms;
 
     public ${DomainName}Service(${DomainName}Repository ${InstanceName}Repository, MessageSource ms) {
         this.${InstanceName}Repository = ${InstanceName}Repository;
+        this.${InstanceName}Mapper = ${InstanceName}Mapper;
         this.ms = ms;
     }
 
     @Transactional
-    public ${DomainName}ResponseDto save(${DomainName}SaveDto ${InstanceName}SaveDto) {
+    public ResultStatus<String> save${DomainName}(${DomainName}SaveDto ${InstanceName}SaveDto) {
 
        ${DomainName} ${InstanceName} = ${InstanceName}Repository.save(${DomainName}.builder()
  
                .build());
 
-       return ${DomainName}ResponseDto.builder()
+         ObjectMapper mapper = new ObjectMapper();
+         Map<String, Object> data = new HashMap<String, Object>();
+         data.put("data", ${InstanceName});
 
-               .build();
+         String jsonList = null;
+         try {
+             jsonList = mapper.writeValueAsString(data);
+         } catch (JsonProcessingException e) {
+
+         }
+         ResultStatus<String> resultStatus = ResultStatus.<String>builder()
+                 .status(StatusEnum.SUCCESS)
+                 .message("저장되었습니다.")
+                 .resultData(jsonList).build();
+
+         return resultStatus;
     }
 
     @Transactional
-    public ${DomainName}ResponseDto modify(Long id, ${DomainName}SaveDto ${InstanceName}SaveDto) {
-        ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+    public ResultStatus<String> modify${DomainName}(${DomainName}SaveDto ${InstanceName}SaveDto) {
+        ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(${InstanceName}SaveDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("등록된 정보가 없습니다."));
 
-        ${DomainName} saved${DomainName} = ${InstanceName}.change${DomainName}(id, ${InstanceName}SaveDto);
+        //저장할 정보 입력
 
-        return ${DomainName}ResponseDto.builder()
+        ${DomainName} saved${InstanceName} = ${InstanceName}Repository.save(${InstanceName});
 
-                .build();
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("data", saved${InstanceName});
+
+        String jsonList = null;
+        try {
+            jsonList = mapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+
+        }
+        ResultStatus<String> resultStatus = ResultStatus.<String>builder()
+                .status(StatusEnum.SUCCESS)
+                .message("저장되었습니다.")
+                .resultData(jsonList).build();
+        return resultStatus;
     }
 
     @Transactional
-    public Long delete(Long id) {
+    public ResultStatus<String> delete${DomainName}(Long id) {
         ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("등록된 정보가 없습니다."));
         ${InstanceName}Repository.delete(${InstanceName});
-        return id;
+
+        ResultStatus<String> resultStatus = ResultStatus.<String>builder()
+                .status(StatusEnum.SUCCESS)
+                .message("삭제되었습니다.").build();
+        return resultStatus;
     }
 
-    public ${DomainName}ResponseDto get${DomainName}(Long id) {
+    @Transactional
+    public ResultStatus<String> get${DomainName}SearchList(${DomainName}SearchDto ${InstanceName}SearchDto) {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> data = new HashMap<String, Object>();
+
+        data.put("${InstanceName}List", ${InstanceName}Mapper.get${DomainName}SearchList(${InstanceName}SearchDto));
+
+        String jsonList = null;
+        try {
+            jsonList = mapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+
+        }
+        ResultStatus<String> resultStatus = ResultStatus.<String>builder()
+                .status(StatusEnum.SUCCESS)
+                .resultData(jsonList).build();
+        return resultStatus;
+    }
+
+    @Transactional
+    public ResultStatus<String> detail${DomainName}(Long id) {
         ${DomainName} ${InstanceName} = ${InstanceName}Repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("등록된 코드정보가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("등록된 정보가 없습니다."));
 
-        return ${DomainName}ResponseDto.builder()
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("data", ${InstanceName});
 
-                .build();
+        String jsonList = null;
+        try {
+            jsonList = mapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+
+        }
+        ResultStatus<String> resultStatus = ResultStatus.<String>builder()
+                .status(StatusEnum.SUCCESS)
+                .resultData(jsonList).build();
+        return resultStatus;
     }
 }

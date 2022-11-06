@@ -1,0 +1,29 @@
+import cAxios from "@/api/axiosIntercept";
+
+export const get${DomainName}SearchList = async (data) => {
+    return await cAxios({url: '/api/${auth}/v1/${InstanceName}/get${DomainName}SearchList', data: data, method: "post"});
+};
+
+export const modify${DomainName} = async (data) => {
+    return await cAxios({url: `/api/${auth}/v1/${InstanceName}/modify${DomainName}`, data: data, method: "put"});
+};
+
+export const save${DomainName} = async(data)=> {
+    return await cAxios({url: `/api/${auth}/v1/${InstanceName}/save${DomainName}`, data: data, method: "post"});
+};
+
+export const delete${DomainName} = async(id) => {
+    return await cAxios({url: `/api/${auth}/v1/${InstanceName}/delete${DomainName}/${id}`, data: null, method: "delete"});
+};
+
+export const detail${DomainName} = async(id) => {
+    return await cAxios({url: `/api/${auth}/v1/${InstanceName}/detail${DomainName}/${id}`, data: null, method: "get"});
+};
+
+
+
+
+
+
+
+
